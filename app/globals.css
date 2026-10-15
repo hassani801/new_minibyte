@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-graphite: var(--graphite);
+  --color-bit-blue: var(--bit-blue);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+:root {
+  --background: #F3F4F1;
+  --foreground: #0C0E12;
+  --card: #FFFFFF;
+  --card-foreground: #0C0E12;
+  --popover: #FFFFFF;
+  --popover-foreground: #0C0E12;
+  --primary: #0C0E12;
+  --primary-foreground: #F3F4F1;
+  --secondary: #E8EAE5;
+  --secondary-foreground: #0C0E12;
+  --muted: #E8EAE5;
+  --muted-foreground: #5A606B;
+  --accent: #4654FF;
+  --accent-foreground: #FFFFFF;
+  --border: #D9DCD6;
+  --input: #D9DCD6;
+  --ring: #4654FF;
+  --radius: 0.75rem;
+
+  --bit-blue: #4654FF;
+  --ink: #0C0E12;
+  --paper: #F3F4F1;
+  --mist: #D9DCD6;
+  --graphite: #5A606B;
+
+  --nav-h: 72px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --nav-h: 64px;
+  }
+}
+
+.dark,
+.theme-ink {
+
+  --background: #0C0E12;
+  --foreground: #F3F4F1;
+  --card: #14161B;
+  --card-foreground: #F3F4F1;
+  --popover: #14161B;
+  --popover-foreground: #F3F4F1;
+  --primary: #F3F4F1;
+  --primary-foreground: #0C0E12;
+  --secondary: #1A1D23;
+  --secondary-foreground: #F3F4F1;
+  --muted: #1A1D23;
+  --muted-foreground: #9AA0AA;
+  --border: #262A32;
+  --input: #262A32;
+  --accent: #4654FF;
+  --accent-foreground: #FFFFFF;
+  --ring: #4654FF;
+}
+
+.theme-ink {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.theme-blue {
+  --cta-fg: #FFFFFF;
+  --cta-fg-muted: rgba(255, 255, 255, 0.90);
+  --cta-line: rgba(255, 255, 255, 0.35);
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent flash of curtain for returning visitors */
+html[data-preloader="done"] #preloader {
+  display: none !important;
+}
+
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-weight: 400;
+}
+
+::selection {
+  background: #4654FF;
+  color: #FFFFFF;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Headings base rules */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Global utility classes */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.data-mono {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Type scale utilities */
+.text-display {
+  font-size: clamp(2.75rem, 5.5vw, 5.5rem);
+  line-height: clamp(3rem, 5.5vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.text-heading {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.text-body {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
