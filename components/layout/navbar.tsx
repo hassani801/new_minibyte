@@ -256,6 +256,7 @@ export function Navbar() {
             : "max-md:bg-transparent max-md:border-transparent",
           "md:bg-transparent md:border-transparent"
         )}
+      >
         <div className="mx-auto max-w-[1280px] h-full px-4 sm:px-6 md:px-8 flex items-center justify-between md:grid md:grid-cols-[auto_1fr_auto]">
           {/* LEFT: Logo */}
           <div className="flex items-center">
