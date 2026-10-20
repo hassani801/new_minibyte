@@ -48,7 +48,7 @@ function ByteCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "group relative rounded-2xl border p-5 md:p-6 min-h-[260px] flex flex-col justify-between list-none overflow-hidden select-none",
+        "group relative rounded-2xl border p-4 sm:p-5 md:p-6 min-h-[220px] sm:min-h-[260px] flex flex-col justify-between list-none overflow-hidden select-none",
         "transition-colors duration-200",
         isInk
           ? "theme-ink bg-background text-foreground border-border hover:border-foreground/40"
@@ -80,7 +80,7 @@ function ByteCard({
 
       {/* Content Block */}
       <div className="relative z-10 mt-auto pt-6">
-        <h3 className="font-mono text-2xl md:text-3xl font-normal tracking-[-0.02em] lowercase text-foreground leading-tight m-0">
+        <h3 className="font-mono text-xl sm:text-2xl md:text-3xl font-normal tracking-[-0.02em] lowercase text-foreground leading-tight m-0">
           <span>{item.term}</span>
           <Dot color="current" aria-hidden="true" />
         </h3>
@@ -128,11 +128,11 @@ export function Bytes() {
       id="bytes"
       data-nav-theme="paper"
       aria-labelledby="bytes-title"
-      className="bg-background text-foreground py-24 lg:py-32 relative"
+      className="bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         {/* Header Block */}
-        <div ref={headerRef} className="max-w-xl mb-12 lg:mb-16">
+        <div ref={headerRef} className="max-w-xl mb-10 md:mb-12 lg:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{
@@ -155,7 +155,7 @@ export function Bytes() {
 
           <h2
             id="bytes-title"
-            className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+            className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
           >
             <WordsPullUp
               text={headline}

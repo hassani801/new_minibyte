@@ -88,8 +88,8 @@ export function Clients() {
           role="list"
           className={cn(
             "relative grid gap-px bg-border border border-border w-full",
-            // Flow layout below lg: 3 columns on mobile, 4 columns on tablet
-            "grid-cols-3 md:grid-cols-4",
+            // Flow layout below lg: 2 columns on mobile, 3 on sm, 4 on tablet
+            "grid-cols-2 sm:grid-cols-3 md:grid-cols-4",
             // Desktop framed layout: 5 columns x 4 rows
             "lg:grid-cols-5 lg:[grid-template-rows:repeat(4,96px)]"
           )}
@@ -108,22 +108,22 @@ export function Clients() {
               delay: 0,
             }}
             className={cn(
-              "bg-card flex flex-col items-center justify-center text-center gap-5 px-6 py-10 md:py-12 select-none",
+              "bg-card flex flex-col items-center justify-center text-center gap-4 sm:gap-5 px-4 sm:px-6 py-8 sm:py-10 md:py-12 select-none",
               // Mobile / Tablet: spans entire row on top
-              "col-span-3 md:col-span-4",
+              "col-span-2 sm:col-span-3 md:col-span-4",
               // Desktop: positioned at row 2-3, col 2-4
               "lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2"
             )}
           >
-            {/* Badge */}
-            <span className="inline-flex rounded-full border border-border px-3 py-1 label-mono text-muted-foreground select-none">
+            {/* Badge: blue accent */}
+            <span className="inline-flex rounded-full border border-border px-3 py-1 label-eyebrow select-none">
               {CLIENTS_COPY.badge}
             </span>
 
-            {/* Headline with Bit Blue Dot (ONE blue element in this section) */}
+            {/* Headline: bolder */}
             <h2
               id="clients-title"
-              className="text-2xl md:text-3xl font-medium tracking-[-0.02em] leading-tight max-w-[516px] text-balance text-foreground m-0"
+              className="text-2xl md:text-3xl font-semibold tracking-[-0.025em] leading-tight max-w-[516px] text-balance text-foreground m-0"
             >
               <span>{CLIENTS_COPY.headline}</span>
               <Dot color="blue" aria-hidden="true" />

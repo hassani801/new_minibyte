@@ -47,12 +47,12 @@ export function EngagementAnimated({
               ease: easeCurve,
               delay: prefersReducedMotion ? 0 : index * 0.08,
             }}
-            className="flex items-center justify-between gap-6 py-4 border-t border-border"
+            className="flex items-center justify-between gap-4 py-3.5 sm:py-4 border-t border-border"
           >
-            <dt className="data-mono text-sm text-muted-foreground">
+            <dt className="data-mono text-xs sm:text-sm text-muted-foreground">
               {fact.label}
             </dt>
-            <dd className="data-mono text-sm text-foreground tabular-nums m-0">
+            <dd className="data-mono text-xs sm:text-sm text-foreground tabular-nums m-0 text-right break-words">
               {fact.value}
             </dd>
           </motion.div>
@@ -60,7 +60,7 @@ export function EngagementAnimated({
       </dl>
 
       {/* 2-Column Grid: What we need from you & Not included */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-8 md:mt-12 w-full">
         {/* What we need from you */}
         <div className="flex flex-col">
           <span className="label-mono text-xs text-muted-foreground">

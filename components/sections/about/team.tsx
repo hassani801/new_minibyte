@@ -169,11 +169,11 @@ export function Team() {
       id="team"
       data-nav-theme="ink"
       aria-labelledby="team-title"
-      className="theme-ink bg-background text-foreground py-24 lg:py-32 relative"
+      className="theme-ink bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         {/* Header Block */}
-        <div className="max-w-[640px] mb-12 lg:mb-16">
+        <div className="max-w-[640px] mb-10 md:mb-12 lg:mb-16">
           {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
@@ -198,7 +198,7 @@ export function Team() {
           {/* H2 Headline: WordsPullUp + Current Color Dot */}
           <h2
             id="team-title"
-            className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+            className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
           >
             <WordsPullUp
               text={headline}
@@ -209,10 +209,10 @@ export function Team() {
           </h2>
         </div>
 
-        {/* 4-Column Grid: grid-cols-2 lg:grid-cols-4 */}
+        {/* 4-Column Grid: grid-cols-1 min-[380px]:grid-cols-2 lg:grid-cols-4 */}
         <ul
           role="list"
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 p-0 m-0"
+          className="grid grid-cols-1 min-[380px]:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 p-0 m-0"
         >
           {members.map((member, index) => (
             <MemberCard

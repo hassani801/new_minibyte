@@ -56,11 +56,11 @@ export function Process() {
       id="process"
       data-nav-theme="paper"
       aria-labelledby="process-title"
-      className="bg-background text-foreground py-24 lg:py-32 relative"
+      className="bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         {/* Header Block */}
-        <div className="max-w-2xl mb-12 lg:mb-16">
+        <div className="max-w-2xl mb-10 md:mb-12 lg:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{
@@ -83,7 +83,7 @@ export function Process() {
 
           <h2
             id="process-title"
-            className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+            className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
           >
             <WordsPullUp
               text={headline}
@@ -245,7 +245,7 @@ export function Process() {
                 onMouseEnter={() => setHoveredKey(phase.key)}
                 onMouseLeave={() => setHoveredKey(null)}
                 className={cn(
-                  "bg-card border rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[260px]",
+                  "bg-card border rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col justify-between min-h-[240px] sm:min-h-[260px]",
                   "transition-colors duration-200",
                   isHighlighted
                     ? "border-foreground/50"

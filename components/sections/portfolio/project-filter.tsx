@@ -58,9 +58,9 @@ export function ProjectFilter() {
       id="projects"
       data-nav-theme="paper"
       aria-labelledby="projects-title"
-      className="bg-background text-foreground py-20 lg:py-28 relative"
+      className="bg-background text-foreground py-16 md:py-20 lg:py-28 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         {/* Header Row */}
         <div
           ref={headerRef}
@@ -90,7 +90,7 @@ export function ProjectFilter() {
 
             <h2
               id="projects-title"
-              className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+              className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
             >
               <WordsPullUp
                 text={headline}
@@ -121,12 +121,12 @@ export function ProjectFilter() {
           onChange={setSelectedTag}
           label={filterLabel}
           allLabel={all}
-          className="mb-10"
+          className="mb-8 md:mb-10"
         />
 
         {/* Projects Grid or Empty State */}
         {filteredProjects.length === 0 ? (
-          <div className="bg-card border border-border rounded-2xl p-12 text-center flex flex-col items-center justify-center min-h-[280px]">
+          <div className="bg-card border border-border rounded-2xl p-6 sm:p-12 text-center flex flex-col items-center justify-center min-h-[220px] sm:min-h-[280px]">
             <p className="text-base text-muted-foreground mb-6 font-normal">
               {empty}
             </p>

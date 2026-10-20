@@ -27,9 +27,9 @@ function ListSkeleton() {
     <section
       data-nav-theme="ink"
       aria-hidden="true"
-      className="theme-ink bg-background py-24 lg:py-32"
+      className="theme-ink bg-background py-16 md:py-24 lg:py-32"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         <div className="h-10 w-48 bg-card border border-border rounded-lg animate-pulse mb-12" />
         <div className="space-y-6">
           {Array.from({ length: 4 }).map((_, i) => (

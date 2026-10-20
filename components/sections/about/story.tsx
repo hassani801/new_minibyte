@@ -33,10 +33,10 @@ export function Story() {
       id="story"
       data-nav-theme="ink"
       aria-labelledby="story-title"
-      className="theme-ink bg-background text-foreground py-24 lg:py-32 relative"
+      className="theme-ink bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-12 lg:gap-20 items-start">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-10 md:gap-12 lg:gap-20 items-start">
           {/* LEFT: Sticky Narrative Intro */}
           <div
             ref={leftColRef}
@@ -66,7 +66,7 @@ export function Story() {
             {/* H2 Headline: WordsPullUp + Bit Blue Dot (The ONE blue in this section) */}
             <h2
               id="story-title"
-              className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+              className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
             >
               <WordsPullUp
                 text={headline}
@@ -135,12 +135,12 @@ export function Story() {
                     ease: easeCurve,
                     delay: prefersReducedMotion ? 0 : 0.35 + idx * 0.08,
                   }}
-                  className="flex items-center justify-between py-4 border-t border-border"
+                  className="flex items-center justify-between py-3.5 sm:py-4 gap-3 sm:gap-4 border-t border-border"
                 >
-                  <dt className="data-mono text-sm text-muted-foreground">
+                  <dt className="data-mono text-xs sm:text-sm text-muted-foreground">
                     {fact.label}
                   </dt>
-                  <dd className="data-mono text-sm text-foreground font-normal tabular-nums">
+                  <dd className="data-mono text-xs sm:text-sm text-foreground font-normal tabular-nums text-right break-words">
                     {fact.value}
                   </dd>
                 </motion.div>

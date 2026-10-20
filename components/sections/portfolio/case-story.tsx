@@ -66,18 +66,18 @@ function ResultCard({ label, value }: ResultCardProps) {
   return (
     <div
       ref={cardRef}
-      className="bg-card border border-border rounded-2xl p-6 flex flex-col justify-between min-h-[140px]"
+      className="bg-card border border-border rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col justify-between min-h-[120px] sm:min-h-[140px]"
     >
       <span className="sr-only">
         {value} {label}
       </span>
       <span
         aria-hidden="true"
-        className="font-mono text-[clamp(2rem,4vw,3rem)] font-normal leading-none tracking-[-0.02em] tabular-nums text-foreground block"
+        className="font-mono text-[clamp(1.75rem,4vw,3rem)] font-normal leading-none tracking-[-0.02em] tabular-nums text-foreground block"
       >
         {displayValue}
       </span>
-      <span className="text-sm text-muted-foreground mt-4 block">
+      <span className="text-xs sm:text-sm text-muted-foreground mt-3 sm:mt-4 block">
         {label}
       </span>
     </div>
@@ -101,14 +101,14 @@ export function CaseStory({ project }: CaseStoryProps) {
   return (
     <div
       data-nav-theme="paper"
-      className="bg-background text-foreground py-24 lg:py-32 relative"
+      className="bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8 space-y-24 lg:space-y-32">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8 space-y-16 sm:space-y-24 lg:space-y-32">
         {/* 1. THE CHALLENGE */}
         {challenge && (
           <section
             aria-labelledby="challenge-title"
-            className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-8 lg:gap-16 items-start"
+            className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-6 lg:gap-16 items-start"
           >
             <div className="lg:sticky lg:top-[calc(var(--nav-h)+32px)] self-start">
               <h2
@@ -119,7 +119,7 @@ export function CaseStory({ project }: CaseStoryProps) {
               </h2>
             </div>
             <div>
-              <p className="text-xl md:text-2xl leading-snug max-w-[620px] text-foreground font-normal m-0">
+              <p className="text-lg sm:text-xl md:text-2xl leading-snug max-w-[620px] text-foreground font-normal m-0">
                 {challenge}
               </p>
             </div>
@@ -130,7 +130,7 @@ export function CaseStory({ project }: CaseStoryProps) {
         {approach && approach.length > 0 && (
           <section
             aria-labelledby="approach-title"
-            className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-8 lg:gap-16 items-start border-t border-border pt-16 lg:pt-24"
+            className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-6 lg:gap-16 items-start border-t border-border pt-12 sm:pt-16 lg:pt-24"
           >
             <div className="lg:sticky lg:top-[calc(var(--nav-h)+32px)] self-start">
               <h2
@@ -165,7 +165,7 @@ export function CaseStory({ project }: CaseStoryProps) {
         {(hasResults || hasGallery) && (
           <section
             aria-labelledby="results-title"
-            className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-8 lg:gap-16 items-start border-t border-border pt-16 lg:pt-24"
+            className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-6 lg:gap-16 items-start border-t border-border pt-12 sm:pt-16 lg:pt-24"
           >
             <div className="lg:sticky lg:top-[calc(var(--nav-h)+32px)] self-start">
               <h2

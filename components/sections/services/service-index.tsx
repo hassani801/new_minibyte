@@ -116,7 +116,7 @@ export function ServiceIndex() {
   const totalCount = String(CAPABILITIES.length).padStart(2, "0");
 
   return (
-    <div className="bg-card border border-border rounded-2xl p-5 md:p-7 w-full max-w-[480px] select-none">
+    <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 md:p-7 w-full max-w-[480px] select-none">
       {/* Header Row */}
       <div className="flex items-center justify-between pb-4 label-mono text-muted-foreground text-xs">
         <span>INDEX</span>

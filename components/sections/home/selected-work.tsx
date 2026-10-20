@@ -5,25 +5,20 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Dot } from "@/components/brand/dot";
 import { WordsPullUp } from "@/components/ui/words-pull-up";
-import { UnderlineLink } from "@/components/ui/underline-link";
 import { ProjectCard } from "@/components/sections/home/project-card";
+import { FeaturedProjectCard } from "@/components/sections/home/featured-project-card";
 import { FEATURED_PROJECTS } from "@/lib/projects";
 import { WORK_COPY } from "@/lib/constants";
-import { cn } from "@/lib/utils";
+import { TransitionLink } from "@/components/layout/transition-link";
 
 const easeCurve = [0.16, 1, 0.3, 1] as const;
 
 /**
- * SelectedWork Section: "Built, measured, delivered."
+ * SelectedWork Section — Figma reference style
  *
- * Paper section featuring a responsive header row and a 3-card spec-sheet grid
- * of featured engineering and research projects.
- *
- * Rules:
- * - data-nav-theme="paper" to ensure navbar flips to light theme over this section.
- * - Max ONE blue element in this section (exclusively the last dot of the first card's DotPattern).
- * - On md (768px), the third card spans both columns (2-col grid).
- * - "All projects" CTA sits in header on desktop, and moves centered below the grid on mobile.
+ * Section header: eyebrow (blue) + bold headline left, "All projects" CTA right.
+ * Featured (first) project gets a large hero card with image on left and spec sheet on right.
+ * Remaining projects in a smaller 3-column grid below.
  */
 export function SelectedWork() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -45,6 +40,8 @@ export function SelectedWork() {
     return () => media.removeEventListener("change", onChange);
   }, []);
 
+  const [featuredProject, ...restProjects] = FEATURED_PROJECTS;
+
   return (
     <section
       ref={sectionRef}
@@ -53,118 +50,93 @@ export function SelectedWork() {
       aria-labelledby="work-title"
       className="bg-background text-foreground"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8 py-24 lg:py-32">
-        {/* HEADER ROW */}
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8 py-16 md:py-24 lg:py-32">
+        {/* HEADER ROW: eyebrow + headline left, CTA right */}
         <div
           ref={headerRef}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 lg:mb-16"
+          className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-10 lg:mb-16"
         >
-          {/* LEFT: Eyebrow, H2 Headline, Lead Copy */}
-          <div className="flex flex-col items-start max-w-xl">
-            {/* Eyebrow: 6px Ink Dot + label-mono */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
+          {/* LEFT: eyebrow + headline */}
+          <div className="flex flex-col items-start max-w-2xl">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
               animate={{
                 opacity: isHeaderInView || prefersReducedMotion ? 1 : 0,
-                y: isHeaderInView || prefersReducedMotion ? 0 : 14,
+                y: isHeaderInView || prefersReducedMotion ? 0 : 12,
               }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : 0.6,
-                ease: easeCurve,
-                delay: prefersReducedMotion ? 0 : 0,
-              }}
-              className="flex items-center gap-2 select-none"
+              transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: easeCurve }}
+              className="label-eyebrow mb-3 sm:mb-4 select-none"
             >
-              <span
-                className="w-[6px] h-[6px] rounded-full bg-foreground shrink-0 inline-block"
-                aria-hidden="true"
-              />
-              <span className="label-mono text-muted-foreground">
-                {WORK_COPY.eyebrow}
-              </span>
-            </motion.div>
+              {WORK_COPY.eyebrow}
+            </motion.p>
 
-            {/* H2 Headline: WordsPullUp + Current Color Dot */}
             <h2
               id="work-title"
-              className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+              className="text-[clamp(2rem,4.5vw,3.5rem)] font-semibold tracking-[-0.03em] leading-[1.06] text-foreground"
             >
               <WordsPullUp
                 text={WORK_COPY.headline}
                 play={isHeaderInView}
-                delay={prefersReducedMotion ? 0 : 0.08}
+                delay={prefersReducedMotion ? 0 : 0.06}
                 lastWordAddon={<Dot color="current" aria-hidden="true" />}
               />
             </h2>
-
-            {/* Lead Copy */}
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{
-                opacity: isHeaderInView || prefersReducedMotion ? 1 : 0,
-                y: isHeaderInView || prefersReducedMotion ? 0 : 14,
-              }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : 0.6,
-                ease: easeCurve,
-                delay: prefersReducedMotion ? 0 : 0.16,
-              }}
-              className="text-base md:text-lg text-muted-foreground max-w-[460px] mt-5 leading-relaxed font-normal"
-            >
-              {WORK_COPY.lead}
-            </motion.p>
           </div>
 
-          {/* RIGHT (Desktop md+): "All projects" CTA */}
+          {/* RIGHT (Desktop): "All projects" CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{
               opacity: isHeaderInView || prefersReducedMotion ? 1 : 0,
-              y: isHeaderInView || prefersReducedMotion ? 0 : 14,
+              y: isHeaderInView || prefersReducedMotion ? 0 : 12,
             }}
-            transition={{
-              duration: prefersReducedMotion ? 0 : 0.6,
-              ease: easeCurve,
-              delay: prefersReducedMotion ? 0 : 0.24,
-            }}
-            className="hidden md:block self-end"
+            transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: easeCurve, delay: prefersReducedMotion ? 0 : 0.1 }}
+            className="hidden md:block md:pt-1 shrink-0"
           >
-            <UnderlineLink
+            <TransitionLink
               href={WORK_COPY.cta.href}
-              className="px-0 h-auto inline-flex items-center gap-1.5"
-              underlineClassName="bottom-0 inset-x-0"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               <span>{WORK_COPY.cta.label}</span>
-              <ArrowRight className="w-4 h-4 ml-1 inline shrink-0" />
-            </UnderlineLink>
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </TransitionLink>
           </motion.div>
         </div>
 
-        {/* PROJECT GRID */}
-        <ul
-          role="list"
-          className="grid gap-4 md:gap-5 md:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0"
-        >
-          {FEATURED_PROJECTS.map((project, index) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              index={index}
-              className={cn(index === 2 && "md:col-span-2 lg:col-span-1")}
-            />
-          ))}
-        </ul>
+        {/* FEATURED CARD: First project gets the large hero layout */}
+        {featuredProject && (
+          <FeaturedProjectCard
+            project={featuredProject}
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        )}
 
-        {/* MOBILE CTA: Centered below grid on mobile */}
-        <div className="mt-8 md:hidden flex justify-center">
-          <UnderlineLink
+        {/* REMAINING CARDS GRID */}
+        {restProjects.length > 0 && (
+          <ul
+            role="list"
+            className="grid gap-4 md:gap-5 md:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0 mt-4 md:mt-5"
+          >
+            {restProjects.map((project, i) => (
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                index={i + 1}
+                showBlue={false}
+              />
+            ))}
+          </ul>
+        )}
+
+        {/* MOBILE CTA */}
+        <div className="mt-8 md:hidden flex justify-start">
+          <TransitionLink
             href={WORK_COPY.cta.href}
-            className="px-0 h-auto inline-flex items-center gap-1.5"
-            underlineClassName="bottom-0 inset-x-0"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
           >
             <span>{WORK_COPY.cta.label}</span>
-            <ArrowRight className="w-4 h-4 ml-1 inline shrink-0" />
-          </UnderlineLink>
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </TransitionLink>
         </div>
       </div>
     </section>

@@ -20,7 +20,7 @@ interface MetricCellProps {
   label: string;
   isInView: boolean;
   prefersReducedMotion: boolean;
-  isFirstOnLg: boolean;
+  index: number;
 }
 
 function MetricCell({
@@ -28,7 +28,7 @@ function MetricCell({
   label,
   isInView,
   prefersReducedMotion,
-  isFirstOnLg,
+  index,
 }: MetricCellProps) {
   const match = rawValue.match(/^([^0-9]*)([0-9]+(?:\.[0-9]+)?)(.*)$/);
   const prefix = match ? match[1] : "";
@@ -75,10 +75,12 @@ function MetricCell({
   return (
     <div
       className={cn(
-        "p-6 md:p-8 flex flex-col justify-between border-b border-border bg-card",
-        "border-r border-border md:border-r-0",
-        "lg:border-l lg:border-border",
-        isFirstOnLg && "lg:border-l-0"
+        "p-5 sm:p-6 md:p-8 flex flex-col justify-between bg-card",
+        index < 3 && "border-b border-border",
+        index % 2 === 0 ? "sm:border-r sm:border-border" : "sm:border-r-0",
+        index < 2 ? "sm:border-b sm:border-border" : "sm:border-b-0",
+        index > 0 ? "lg:border-l lg:border-border" : "lg:border-l-0",
+        "lg:border-r-0 lg:border-b-0"
       )}
     >
       <div>
@@ -90,7 +92,7 @@ function MetricCell({
         {/* Animated Number */}
         <span
           aria-hidden="true"
-          className="font-mono text-[clamp(2.5rem,5vw,4.25rem)] font-normal leading-none tracking-[-0.03em] tabular-nums text-foreground block"
+          className="font-mono text-[clamp(2.25rem,4.5vw,4.25rem)] font-normal leading-none tracking-[-0.03em] tabular-nums text-foreground block"
         >
           {displayValue}
         </span>
@@ -138,12 +140,12 @@ export function CompanyHighlights() {
       id="highlights"
       data-nav-theme="paper"
       aria-labelledby="highlights-title"
-      className="theme-paper bg-background text-foreground py-20 lg:py-28 relative border-t border-border"
+      className="theme-paper bg-background text-foreground py-16 md:py-20 lg:py-28 relative border-t border-border"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         {/* Header Block */}
-        <div className="max-w-2xl mb-12 lg:mb-16">
-          <motion.div
+        <div className="max-w-2xl mb-10 lg:mb-16">
+          <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{
               opacity: isInView || prefersReducedMotion ? 1 : 0,
@@ -154,20 +156,14 @@ export function CompanyHighlights() {
               ease: easeCurve,
               delay: 0,
             }}
-            className="flex items-center gap-2 select-none"
+            className="label-eyebrow mb-3 sm:mb-4 select-none"
           >
-            <span
-              className="w-[6px] h-[6px] rounded-full bg-foreground shrink-0 inline-block"
-              aria-hidden="true"
-            />
-            <span className="label-mono text-muted-foreground">
-              SYS.05 // PROVEN TRACK RECORD &amp; ENTERPRISE HERITAGE
-            </span>
-          </motion.div>
+            PROVEN TRACK RECORD
+          </motion.p>
 
           <h2
             id="highlights-title"
-            className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+            className="text-[clamp(2rem,4.5vw,3.5rem)] font-semibold tracking-[-0.03em] leading-[1.06] mt-4 sm:mt-5 text-foreground"
           >
             <WordsPullUp
               text="Twenty years of building systems that never fail"
@@ -188,7 +184,7 @@ export function CompanyHighlights() {
               ease: easeCurve,
               delay: prefersReducedMotion ? 0 : 0.16,
             }}
-            className="text-base md:text-lg text-muted-foreground leading-relaxed mt-5 max-w-xl font-normal"
+            className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed mt-4 sm:mt-5 max-w-xl font-normal"
           >
             Standard solutions solve standard problems. For everything else, you need a team that has shipped in fields, in factories, on contested networks, and at enterprise scale. That’s the only kind of work we do.
           </motion.p>
@@ -198,7 +194,7 @@ export function CompanyHighlights() {
         <div
           role="region"
           aria-label="Key delivery metrics"
-          className="border-t border-border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 overflow-hidden rounded-2xl border"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 overflow-hidden rounded-2xl border border-border"
         >
           {HIGHLIGHTS_METRICS.map((metric, index) => (
             <MetricCell
@@ -207,7 +203,7 @@ export function CompanyHighlights() {
               label={metric.label}
               isInView={isInView}
               prefersReducedMotion={prefersReducedMotion}
-              isFirstOnLg={index === 0}
+              index={index}
             />
           ))}
         </div>

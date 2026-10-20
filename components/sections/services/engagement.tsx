@@ -29,10 +29,10 @@ export function Engagement() {
       id="engagement"
       data-nav-theme="ink"
       aria-labelledby="engagement-title"
-      className="theme-ink bg-background text-foreground py-24 lg:py-32 relative"
+      className="theme-ink bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-12 lg:gap-20 items-start">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-10 md:gap-12 lg:gap-20 items-start">
           {/* LEFT: Sticky Heading & Eyebrow */}
           <div className="lg:sticky lg:top-[calc(var(--nav-h)+48px)] self-start flex flex-col items-start">
             {/* Eyebrow */}
@@ -47,7 +47,7 @@ export function Engagement() {
             {/* H2 Headline: WordsPullUp (Client island) + Current Color Dot */}
             <h2
               id="engagement-title"
-              className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+              className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
             >
               <WordsPullUp
                 text={headline}

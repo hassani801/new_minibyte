@@ -42,16 +42,16 @@ export function CaseOverview({ project }: CaseOverviewProps) {
       id="overview"
       data-nav-theme="ink"
       aria-labelledby="overview-title"
-      className="theme-ink bg-background text-foreground py-16 lg:py-24 relative border-t border-border"
+      className="theme-ink bg-background text-foreground py-12 sm:py-16 lg:py-24 relative border-t border-border"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         <h2 id="overview-title" className="sr-only">
           Project Overview
         </h2>
 
         {/* Spec Table Grid */}
         {facts.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 min-[380px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {facts.map((fact, index) => (
               <div key={`${fact.label}-${index}`} className="border-t border-border pt-4 flex flex-col gap-1.5">
                 <span className="label-mono text-xs text-muted-foreground">
@@ -60,8 +60,8 @@ export function CaseOverview({ project }: CaseOverviewProps) {
                 <span
                   className={
                     fact.isDataMono
-                      ? "data-mono text-base text-foreground tabular-nums"
-                      : "text-base text-foreground font-normal"
+                      ? "data-mono text-sm sm:text-base text-foreground tabular-nums break-words"
+                      : "text-sm sm:text-base text-foreground font-normal break-words"
                   }
                 >
                   {fact.value}

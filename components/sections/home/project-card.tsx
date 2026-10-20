@@ -91,7 +91,7 @@ export function ProjectCard({
         onFocus={() => setIsHovered(true)}
         onBlur={() => setIsHovered(false)}
         className={cn(
-          "group relative flex h-full flex-col rounded-2xl border overflow-hidden p-5 md:p-6 transition-colors duration-300 select-none",
+          "group relative flex h-full flex-col rounded-2xl border overflow-hidden p-4 sm:p-5 md:p-6 transition-colors duration-300 select-none",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           "active:scale-[0.99] transition-transform",
           isInk
@@ -170,8 +170,8 @@ export function ProjectCard({
         </div>
 
         {/* TITLE ROW: Project Name in Geist Mono + Full Stop & Arrow Circle */}
-        <div className="flex items-center justify-between gap-4 mt-6">
-          <h3 className="font-mono text-2xl md:text-3xl font-normal tracking-[-0.02em] lowercase text-foreground [overflow-wrap:anywhere]">
+        <div className="flex items-center justify-between gap-3 sm:gap-4 mt-5 sm:mt-6">
+          <h3 className="font-mono text-xl sm:text-2xl md:text-3xl font-normal tracking-[-0.02em] lowercase text-foreground [overflow-wrap:anywhere] break-words">
             <ScrambleText characterSet="01" trigger={isHovered}>
               {project.name}
             </ScrambleText>
@@ -181,7 +181,7 @@ export function ProjectCard({
           <span
             aria-hidden="true"
             className={cn(
-              "w-9 h-9 rounded-full border border-border grid place-items-center shrink-0 transition-all duration-[250ms] select-none",
+              "w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-border grid place-items-center shrink-0 transition-all duration-[250ms] select-none",
               "[@media(hover:hover)]:group-hover:bg-foreground [@media(hover:hover)]:group-hover:text-background [@media(hover:hover)]:group-hover:border-foreground group-focus-visible:bg-foreground group-focus-visible:text-background group-focus-visible:border-foreground"
             )}
           >
@@ -201,11 +201,11 @@ export function ProjectCard({
         </p>
 
         {/* TAGS */}
-        <div className="flex flex-wrap gap-2 mt-4 select-none">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-4 select-none">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="label-mono text-xs px-2.5 py-1 rounded-full border border-border text-muted-foreground"
+              className="label-mono text-[10px] sm:text-xs px-2.5 py-1 rounded-full border border-border text-muted-foreground"
             >
               {tag}
             </span>
@@ -218,12 +218,12 @@ export function ProjectCard({
             {project.specs.map((spec) => (
               <div
                 key={spec.label}
-                className="flex items-center justify-between py-2.5 border-t border-border"
+                className="flex items-center justify-between py-2 sm:py-2.5 border-t border-border gap-3"
               >
-                <dt className="data-mono text-[13px] text-muted-foreground">
+                <dt className="data-mono text-xs sm:text-[13px] text-muted-foreground shrink-0">
                   {spec.label}
                 </dt>
-                <dd className="data-mono text-[13px] text-foreground font-normal tabular-nums">
+                <dd className="data-mono text-xs sm:text-[13px] text-foreground font-normal tabular-nums text-right break-words">
                   {spec.value}
                 </dd>
               </div>

@@ -46,7 +46,7 @@ function ServiceArticle({
         duration: prefersReducedMotion ? 0 : 0.8,
         ease: easeCurve,
       }}
-      className="border-t border-border py-12 md:py-16 first:border-t-0"
+      className="border-t border-border py-8 sm:py-12 md:py-16 first:border-t-0"
     >
       <div className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-8 lg:gap-16 items-start">
         {/* LEFT: Sticky metadata & title */}
@@ -234,11 +234,11 @@ export function ServiceDetail() {
       id="services-detail"
       data-nav-theme="ink"
       aria-labelledby="services-detail-title"
-      className="theme-ink bg-background text-foreground py-24 lg:py-32 relative"
+      className="theme-ink bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         {/* Header Row */}
-        <div ref={headerRef} className="max-w-xl mb-16">
+        <div ref={headerRef} className="max-w-xl mb-10 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{
@@ -261,7 +261,7 @@ export function ServiceDetail() {
 
           <h2
             id="services-detail-title"
-            className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+            className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
           >
             <WordsPullUp
               text={headline}

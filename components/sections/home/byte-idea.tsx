@@ -5,7 +5,6 @@ import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
 import { WordsPullUp } from "@/components/ui/words-pull-up";
 import { Dot } from "@/components/brand/dot";
-import { UnderlineLink } from "@/components/ui/underline-link";
 import { BYTE_IDEA } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -49,26 +48,20 @@ export function ByteIdea() {
     >
       <div
         ref={wrapperRef}
-        className="mx-auto max-w-[1280px] px-6 md:px-8 py-24 lg:py-32 min-h-[calc(100svh-var(--nav-h))] flex items-center w-full"
+        className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8 py-16 md:py-24 lg:py-32 min-h-0 lg:min-h-[calc(100svh-var(--nav-h))] flex items-center w-full"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 lg:gap-16 items-start w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-16 items-start w-full">
           {/* LEFT COLUMN: Editorial Narrative */}
           <div ref={leftColRef} className="flex flex-col items-start max-w-xl">
-            {/* Eyebrow: 6px Ink Dot + "THE IDEA" */}
-            <div className="flex items-center gap-2 select-none">
-              <span
-                className="w-1.5 h-1.5 rounded-full bg-foreground shrink-0 inline-block"
-                aria-hidden="true"
-              />
-              <span className="label-mono text-muted-foreground">
-                {BYTE_IDEA.eyebrow}
-              </span>
+            {/* Eyebrow: blue accent, no dot */}
+            <div className="label-eyebrow mb-4 sm:mb-5 select-none">
+              {BYTE_IDEA.eyebrow}
             </div>
 
-            {/* H2 Headline: WordsPullUp with currentColor Dot */}
+            {/* H2 Headline: bolder, tighter, fluid clamp */}
             <h2
               id="byte-idea-title"
-              className="text-[clamp(2.25rem,5vw,3.75rem)] font-medium tracking-[-0.03em] leading-[1.02] mt-5 text-foreground"
+              className="text-[clamp(2rem,4.5vw,3.5rem)] font-semibold tracking-[-0.03em] leading-[1.06] mt-0 text-foreground"
             >
               <WordsPullUp
                 text={BYTE_IDEA.headline}
@@ -104,7 +97,7 @@ export function ByteIdea() {
                   className="flex items-start gap-3 text-base text-muted-foreground leading-normal"
                 >
                   <span
-                    className="w-1.5 h-1.5 rounded-full bg-foreground shrink-0 inline-block mt-2"
+                    className="w-1 h-1 rounded-full bg-muted-foreground shrink-0 inline-block mt-[0.55em]"
                     aria-hidden="true"
                   />
                   <span>{point}</span>
@@ -112,20 +105,24 @@ export function ByteIdea() {
               ))}
             </ul>
 
-            {/* Secondary CTA: Drawing Underline Link */}
+            {/* Secondary CTA */}
             <div className="mt-8">
-              <UnderlineLink href={BYTE_IDEA.cta.href}>
-                {BYTE_IDEA.cta.label}
-              </UnderlineLink>
+              <a
+                href={BYTE_IDEA.cta.href}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors group"
+              >
+                <span>{BYTE_IDEA.cta.label}</span>
+                <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </a>
             </div>
           </div>
 
           {/* RIGHT COLUMN: The Folding Diagram Card & Captions */}
           <div className="flex flex-col w-full">
             {/* Diagram Card Container */}
-            <div className="bg-card border border-border rounded-2xl p-6 md:p-10 relative w-full">
+            <div className="bg-card border border-border rounded-2xl p-4 sm:p-6 md:p-10 relative w-full">
               {/* Card Header Row */}
-              <div className="flex items-center justify-between select-none border-b border-border/50 pb-4 mb-6">
+              <div className="flex items-center justify-between select-none border-b border-border/50 pb-4 mb-4 sm:mb-6">
                 <span className="label-mono text-muted-foreground">
                   {BYTE_IDEA.cardLabel}
                 </span>
@@ -135,7 +132,7 @@ export function ByteIdea() {
               </div>
 
               {/* Card Title */}
-              <h3 className="text-2xl md:text-3xl font-normal tracking-[-0.02em] text-foreground mb-6">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-normal tracking-[-0.02em] text-foreground mb-4 sm:mb-6">
                 {BYTE_IDEA.cardTitle}
               </h3>
 

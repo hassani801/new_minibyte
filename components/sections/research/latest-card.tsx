@@ -59,7 +59,7 @@ export function LatestCard() {
         delay: prefersReducedMotion ? 0 : 0.3,
       }}
       className={cn(
-        "group relative rounded-2xl border border-border p-6 md:p-8 min-h-[320px] w-full max-w-[480px] select-none",
+        "group relative rounded-2xl border border-border p-5 sm:p-6 md:p-8 min-h-[280px] sm:min-h-[320px] w-full max-w-[480px] select-none",
         "theme-ink bg-background text-foreground flex flex-col justify-between overflow-hidden"
       )}
     >
@@ -89,12 +89,12 @@ export function LatestCard() {
         </div>
 
         {/* Content Block */}
-        <div className="mt-10 mb-8">
-          <h3 className="text-xl md:text-2xl leading-snug font-medium text-foreground tracking-[-0.01em] m-0">
+        <div className="mt-8 sm:mt-10 mb-6 sm:mb-8">
+          <h3 className="text-lg sm:text-xl md:text-2xl leading-snug font-medium text-foreground tracking-[-0.01em] m-0">
             {latestPub.title}
           </h3>
 
-          <p className="text-sm text-muted-foreground mt-3 font-normal m-0">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-3 font-normal m-0 break-words">
             {latestPub.authors.join(", ")}
           </p>
 

@@ -256,8 +256,7 @@ export function Navbar() {
             : "max-md:bg-transparent max-md:border-transparent",
           "md:bg-transparent md:border-transparent"
         )}
-      >
-        <div className="mx-auto max-w-[1280px] h-full px-4 md:px-8 grid grid-cols-[auto_1fr_auto] items-center justify-between md:grid flex justify-between">
+        <div className="mx-auto max-w-[1280px] h-full px-4 sm:px-6 md:px-8 flex items-center justify-between md:grid md:grid-cols-[auto_1fr_auto]">
           {/* LEFT: Logo */}
           <div className="flex items-center">
             <Logo
@@ -369,7 +368,7 @@ export function Navbar() {
           id="mobile-menu"
           ref={menuContentRef}
           onEscapeKeyDown={() => setIsOpen(false)}
-          className="fixed inset-0 z-[60] theme-ink bg-background text-foreground pt-[calc(var(--nav-h)+24px)] px-6 pb-8 flex flex-col justify-between overflow-y-auto outline-none"
+          className="fixed inset-0 z-[60] theme-ink bg-background text-foreground pt-[calc(var(--nav-h)+16px)] px-5 sm:px-6 pb-8 flex flex-col justify-between overflow-y-auto overscroll-contain outline-none min-h-[100dvh]"
         >
           <Dialog.Title className="sr-only">Menu</Dialog.Title>
           <Dialog.Description className="sr-only">
@@ -390,13 +389,13 @@ export function Navbar() {
                   <TransitionLink
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between py-5 border-b border-border w-full group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex items-center justify-between py-4 sm:py-5 border-b border-border w-full group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
-                    <span className="flex items-baseline gap-4">
+                    <span className="flex items-baseline gap-3 sm:gap-4">
                       <span className="font-mono text-xs text-muted-foreground tabular-nums select-none">
                         {numStr}
                       </span>
-                      <span className="text-[clamp(2rem,9vw,3rem)] font-medium tracking-tight text-foreground transition-transform duration-200 group-hover:translate-x-1">
+                      <span className="text-[clamp(1.75rem,7.5vw,2.75rem)] font-medium tracking-tight text-foreground transition-transform duration-200 group-hover:translate-x-1">
                         {item.name}
                       </span>
                     </span>

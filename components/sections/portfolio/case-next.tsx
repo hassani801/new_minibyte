@@ -24,9 +24,9 @@ export function CaseNext({ currentSlug }: CaseNextProps) {
     <section
       data-nav-theme="ink"
       aria-label="Next and previous projects"
-      className="theme-ink bg-background text-foreground py-20 lg:py-28 relative border-t border-border overflow-hidden"
+      className="theme-ink bg-background text-foreground py-16 md:py-20 lg:py-28 relative border-t border-border overflow-hidden"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8 flex flex-col gap-12">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8 flex flex-col gap-8 sm:gap-12">
         {/* Previous Project Link (if >= 3 projects) */}
         {hasMultipleProjects && (
           <div className="flex items-center">
@@ -51,7 +51,7 @@ export function CaseNext({ currentSlug }: CaseNextProps) {
           onFocus={() => setIsNextHovered(true)}
           onBlur={() => setIsNextHovered(false)}
           className={cn(
-            "group relative rounded-3xl border border-border bg-card p-8 md:p-14 overflow-hidden block",
+            "group relative rounded-2xl sm:rounded-3xl border border-border bg-card p-6 sm:p-8 md:p-14 overflow-hidden block",
             "transition-colors duration-300 [@media(hover:hover)]:hover:border-foreground/40",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
           )}
@@ -69,7 +69,7 @@ export function CaseNext({ currentSlug }: CaseNextProps) {
             </div>
           </div>
 
-          <div className="relative z-10 flex flex-col justify-between min-h-[220px]">
+          <div className="relative z-10 flex flex-col justify-between min-h-[200px] sm:min-h-[220px]">
             {/* Header Tag */}
             <div className="flex items-center justify-between">
               <span className="label-mono text-xs text-muted-foreground">
@@ -79,17 +79,17 @@ export function CaseNext({ currentSlug }: CaseNextProps) {
               {/* Arrow Circle */}
               <div
                 className={cn(
-                  "w-12 h-12 rounded-full border border-border flex items-center justify-center transition-all duration-300",
+                  "w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border flex items-center justify-center transition-all duration-300",
                   "group-hover:bg-foreground group-hover:text-background group-hover:border-foreground"
                 )}
               >
-                <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </div>
 
             {/* Next Project Name in Geist Mono */}
-            <div className="my-6">
-              <h3 className="font-mono text-[clamp(2.5rem,7vw,6rem)] font-normal tracking-[-0.03em] leading-none lowercase text-foreground [overflow-wrap:anywhere]">
+            <div className="my-4 sm:my-6">
+              <h3 className="font-mono text-[clamp(2rem,6.5vw,5.5rem)] font-normal tracking-[-0.03em] leading-none lowercase text-foreground [overflow-wrap:anywhere]">
                 <ScrambleText trigger={isNextHovered} characterSet="01">
                   {next.name}
                 </ScrambleText>

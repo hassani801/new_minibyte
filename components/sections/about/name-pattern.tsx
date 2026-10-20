@@ -58,12 +58,12 @@ export function NamePattern() {
   return (
     <div
       ref={containerRef}
-      className="bg-card rounded-2xl border border-border p-5 md:p-8 w-full max-w-[460px] select-none"
+      className="bg-card rounded-2xl border border-border p-4 sm:p-6 md:p-8 w-full max-w-[460px] select-none"
     >
       {/* 8-Letter Label Column + 8x8 Dot SVG */}
-      <div className="flex items-center gap-4 md:gap-6 w-full">
-        {/* Left Column of 8 Letter Labels */}
-        <div className="flex flex-col justify-between py-1.5 md:py-2.5 h-[280px] sm:h-[340px] md:h-[380px] shrink-0 font-mono text-sm text-muted-foreground select-none">
+      <div className="flex items-center gap-3 sm:gap-4 md:gap-6 w-full">
+        {/* Left Column of 8 Letter Labels - dynamic 8-row grid matching SVG 8 rows */}
+        <div className="grid grid-rows-8 self-stretch items-center shrink-0 font-mono text-xs sm:text-sm text-muted-foreground select-none">
           {LETTERS.map((letter, rowIdx) => {
             const isDimmed = activeRow !== null && activeRow !== rowIdx;
 

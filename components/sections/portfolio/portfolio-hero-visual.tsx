@@ -50,7 +50,7 @@ export function PortfolioHeroVisual() {
   const binaryString = displayCount.toString(2).padStart(8, "0");
 
   return (
-    <div className="bg-card rounded-2xl border border-border p-6 md:p-8 w-full max-w-[420px] select-none flex flex-col justify-between">
+    <div className="bg-card rounded-2xl border border-border p-4 sm:p-6 md:p-8 w-full max-w-[420px] select-none flex flex-col justify-between">
       {/* Top Header Row */}
       <div className="flex items-center justify-between label-mono text-xs text-muted-foreground">
         <span>PROJECTS</span>
@@ -59,7 +59,7 @@ export function PortfolioHeroVisual() {
 
       {/* Main Counter Display */}
       <div className="my-6">
-        <span className="font-mono text-[clamp(4rem,9vw,7rem)] font-normal leading-none tracking-tight tabular-nums text-foreground block">
+        <span className="font-mono text-[clamp(3.5rem,8.5vw,7rem)] font-normal leading-none tracking-tight tabular-nums text-foreground block">
           {paddedCount}
         </span>
       </div>

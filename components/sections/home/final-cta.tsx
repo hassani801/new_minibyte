@@ -82,7 +82,7 @@ export function FinalCta({
       id="contact-cta"
       data-nav-theme="blue"
       aria-labelledby="cta-title"
-      className="theme-blue relative isolate overflow-hidden text-white min-h-[max(560px,80svh)] flex items-center"
+      className="theme-blue relative isolate overflow-hidden text-white min-h-0 md:min-h-[max(500px,75svh)] flex items-center"
       style={{ background: "var(--bit-blue)" }}
     >
       {/* BACKGROUND PATTERN WITH PARALLAX */}
@@ -124,7 +124,7 @@ export function FinalCta({
       </motion.div>
 
       {/* FOREGROUND CONTENT */}
-      <div className="relative z-10 container mx-auto w-full max-w-[1280px] px-6 md:px-8 py-24 lg:py-32 flex flex-col items-start">
+      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 sm:px-6 md:px-8 py-16 md:py-24 lg:py-32 flex flex-col items-start">
         {/* Top Label Row: Eyebrow on left + 8-bit byte equation on right */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
@@ -139,15 +139,9 @@ export function FinalCta({
           }}
           className="w-full flex items-center justify-between select-none"
         >
-          <div className="flex items-center gap-2">
-            <span
-              className="w-[6px] h-[6px] rounded-full bg-white shrink-0 inline-block"
-              aria-hidden="true"
-            />
-            <span className="label-mono text-[var(--cta-fg-muted)]">
-              {eyebrow}
-            </span>
-          </div>
+          <p className="label-mono text-[var(--cta-fg-muted)]">
+            {eyebrow}
+          </p>
 
           <span className="hidden md:block label-mono text-[var(--cta-fg-muted)] tabular-nums">
             {CTA_COPY.byteLine}
@@ -157,7 +151,7 @@ export function FinalCta({
         {/* H2 Headline: WordsPullUp + White Dot */}
         <h2
           id="cta-title"
-          className="text-[clamp(2.75rem,8vw,6.5rem)] font-medium tracking-[-0.035em] leading-[0.98] mt-7 text-balance md:max-w-[14ch] text-white"
+          className="text-[clamp(2rem,7vw,6.5rem)] font-semibold tracking-[-0.035em] leading-[1.0] mt-6 sm:mt-7 text-balance md:max-w-[14ch] text-white [overflow-wrap:anywhere]"
         >
           <WordsPullUp
             text={headline}
@@ -180,7 +174,7 @@ export function FinalCta({
             ease: easeCurve,
             delay: prefersReducedMotion ? 0 : 0.55,
           }}
-          className="text-base md:text-lg max-w-[460px] text-[var(--cta-fg-muted)] mt-7 leading-relaxed font-normal"
+          className="text-sm sm:text-base md:text-lg max-w-[460px] text-[var(--cta-fg-muted)] mt-5 sm:mt-7 leading-relaxed font-normal"
         >
           {sub}
         </motion.p>

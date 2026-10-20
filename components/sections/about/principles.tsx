@@ -44,8 +44,8 @@ function PrincipleCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "group relative bg-card border border-border rounded-2xl p-6 md:p-8",
-        "flex flex-col gap-6 min-h-[240px] cursor-default select-none",
+        "group relative bg-card border border-border rounded-2xl p-5 sm:p-6 md:p-8",
+        "flex flex-col gap-5 sm:gap-6 min-h-[220px] sm:min-h-[240px] cursor-default select-none",
         "transition-colors duration-200 hover:border-foreground/40"
       )}
     >
@@ -116,11 +116,11 @@ export function Principles() {
       id="principles"
       data-nav-theme="paper"
       aria-labelledby="principles-title"
-      className="bg-background text-foreground py-24 lg:py-32 relative"
+      className="bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         {/* Header Block */}
-        <div ref={headerRef} className="max-w-[640px] mb-12 lg:mb-16">
+        <div ref={headerRef} className="max-w-[640px] mb-10 md:mb-12 lg:mb-16">
           {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
@@ -145,7 +145,7 @@ export function Principles() {
           {/* H2 Headline: WordsPullUp + Current Color Dot */}
           <h2
             id="principles-title"
-            className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+            className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
           >
             <WordsPullUp
               text={headline}

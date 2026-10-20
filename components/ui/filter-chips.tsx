@@ -54,9 +54,9 @@ export function FilterChips({
     <div
       role="group"
       aria-label={label}
-      className={cn("relative -mx-6 px-6 md:mx-0 md:px-0", className)}
+      className={cn("relative -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 max-w-full overflow-hidden", className)}
     >
-      <div className="flex items-center gap-2 overflow-x-auto snap-x no-wrap scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-1">
+      <div className="flex items-center gap-2 overflow-x-auto snap-x flex-nowrap whitespace-nowrap scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-1">
         {options.map((opt, index) => {
           const isSelected = value === opt;
           const displayLabel = opt === "All" ? allLabel : opt;

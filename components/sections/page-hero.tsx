@@ -74,17 +74,17 @@ export function PageHero({
         isBlue && "theme-blue text-white",
         !isInk && !isBlue && "bg-background text-foreground",
         "relative overflow-hidden",
-        "min-h-[max(560px,78svh)] flex items-end lg:items-center",
-        "pt-[calc(var(--nav-h)+48px)] pb-[72px]",
+        "min-h-0 md:min-h-[max(500px,75svh)] flex items-end lg:items-center",
+        "pt-[calc(var(--nav-h)+24px)] md:pt-[calc(var(--nav-h)+48px)] pb-12 sm:pb-14 md:pb-[72px]",
         className
       )}
       style={isBlue ? { background: "var(--bit-blue)" } : undefined}
     >
-      <div className="mx-auto max-w-[1280px] w-full px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] w-full px-4 sm:px-6 md:px-8">
         <div
           className={cn(
             hasVisual
-              ? "grid grid-cols-1 lg:grid-cols-[6fr_6fr] gap-12 lg:gap-16 items-center"
+              ? "grid grid-cols-1 lg:grid-cols-[6fr_6fr] gap-8 lg:gap-16 items-center"
               : "flex flex-col items-start max-w-[880px]"
           )}
         >
@@ -104,23 +104,13 @@ export function PageHero({
               }}
               className="flex items-center justify-between w-full select-none"
             >
-              <div className="flex items-center gap-2">
-                <span
-                  className={cn(
-                    "w-[6px] h-[6px] rounded-full shrink-0 inline-block",
-                    isBlue ? "bg-white" : "bg-foreground"
-                  )}
-                  aria-hidden="true"
-                />
-                <span
-                  className={cn(
-                    "label-mono",
-                    isBlue ? "text-[var(--cta-fg-muted)]" : "text-muted-foreground"
-                  )}
-                >
-                  {eyebrow}
-                </span>
-              </div>
+              <p
+                className={cn(
+                  isBlue ? "label-mono text-[var(--cta-fg-muted)]" : "label-eyebrow"
+                )}
+              >
+                {eyebrow}
+              </p>
 
               {index && (
                 <span
@@ -134,13 +124,13 @@ export function PageHero({
               )}
             </motion.div>
 
-            {/* H1 Headline (The single H1 of the page) */}
+            {/* H1 Headline: fluid responsive clamp down to 320px mobile */}
             <h1
               id={`${id}-title`}
               className={cn(
-                "text-[clamp(2.75rem,7vw,5.5rem)] leading-[1] text-balance mt-6",
+                "text-[clamp(2rem,6.5vw,5.5rem)] leading-[1.03] text-balance mt-4 sm:mt-6 [overflow-wrap:anywhere] break-words",
                 isBlue ? "text-white" : "text-foreground",
-                mono ? "font-mono lowercase tracking-[-0.02em]" : "font-medium tracking-[-0.035em]",
+                mono ? "font-mono lowercase tracking-[-0.02em]" : "font-semibold tracking-[-0.035em]",
                 hasVisual ? "max-w-[16ch]" : "max-w-[20ch]"
               )}
             >
@@ -167,7 +157,7 @@ export function PageHero({
                   delay: prefersReducedMotion ? 0 : 0.5,
                 }}
                 className={cn(
-                  "text-base md:text-lg md:text-xl max-w-[520px] mt-7 leading-relaxed font-normal",
+                  "text-sm sm:text-base md:text-lg md:text-xl max-w-[520px] mt-5 sm:mt-7 leading-relaxed font-normal",
                   isBlue ? "text-[var(--cta-fg-muted)]" : "text-muted-foreground"
                 )}
               >
@@ -208,7 +198,7 @@ export function PageHero({
                 ease: easeCurve,
                 delay: prefersReducedMotion ? 0 : 0.3,
               }}
-              className="mt-12 lg:mt-0 w-full flex justify-center lg:justify-end"
+              className="mt-8 lg:mt-0 w-full flex justify-center lg:justify-end max-w-full overflow-hidden"
             >
               {visualContent}
             </motion.div>

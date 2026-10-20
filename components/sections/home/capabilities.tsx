@@ -5,30 +5,25 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Dot } from "@/components/brand/dot";
 import { WordsPullUp } from "@/components/ui/words-pull-up";
-import { UnderlineLink } from "@/components/ui/underline-link";
-import { CapabilityRow } from "@/components/sections/home/capability-row";
+import { TransitionLink } from "@/components/layout/transition-link";
 import { CAPABILITIES, CAPABILITIES_COPY } from "@/lib/constants";
 
 const easeCurve = [0.16, 1, 0.3, 1] as const;
 
 /**
- * Capabilities Section
+ * Capabilities Section — Figma reference style
  *
- * Full Ink section with a sticky intro on the left and a list of 5 capability rows
- * on the right. Each row features a ByteMark icon (the binary of its 1-based index),
- * an 8-bit binary readout that scrambles on hover, title, description, tags, and
- * links to the Services page.
- *
- * Rule: Exactly ONE Bit Blue element in the section: the Dot after the headline.
+ * Section header: eyebrow (blue) + bold headline left, lead copy + CTA right.
+ * Below: 4 numbered cards in a horizontal grid (01–04), where the last card
+ * is highlighted in ink to draw visual focus — matching the reference "Run" card.
  */
 export function Capabilities() {
   const sectionRef = useRef<HTMLElement>(null);
-  const leftColRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
-  const isLeftInView = useInView(leftColRef, {
-    once: true,
-    margin: "-15% 0px",
-  });
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-10% 0px" });
+  const isCardsInView = useInView(cardsRef, { once: true, margin: "-10% 0px" });
 
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -41,8 +36,6 @@ export function Capabilities() {
     return () => media.removeEventListener("change", onChange);
   }, []);
 
-  const countPadded = String(CAPABILITIES.length).padStart(2, "0");
-
   return (
     <section
       ref={sectionRef}
@@ -51,120 +44,142 @@ export function Capabilities() {
       aria-labelledby="capabilities-title"
       className="theme-ink bg-background text-foreground"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8 py-24 lg:py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-12 lg:gap-20 items-start">
-          {/* LEFT COLUMN: Sticky Narrative Intro */}
-          <div
-            ref={leftColRef}
-            className="lg:sticky lg:top-[calc(var(--nav-h)+48px)] self-start flex flex-col items-start max-w-xl"
-          >
-            {/* Eyebrow: 6px Paper Dot (not blue) + label-mono */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{
-                opacity: isLeftInView || prefersReducedMotion ? 1 : 0,
-                y: isLeftInView || prefersReducedMotion ? 0 : 14,
-              }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : 0.6,
-                ease: easeCurve,
-                delay: prefersReducedMotion ? 0 : 0,
-              }}
-              className="flex items-center gap-2 select-none"
-            >
-              <span
-                className="w-[6px] h-[6px] rounded-full bg-paper shrink-0 inline-block"
-                aria-hidden="true"
-              />
-              <span className="label-mono text-muted-foreground">
-                {CAPABILITIES_COPY.eyebrow}
-              </span>
-            </motion.div>
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8 py-16 md:py-24 lg:py-32">
 
-            {/* H2 Headline: WordsPullUp + Bit Blue Dot (the ONE blue element in this section) */}
+        {/* SECTION HEADER: eyebrow + headline left, lead + CTA right */}
+        <div
+          ref={headerRef}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-start mb-12 lg:mb-20"
+        >
+          {/* Left: eyebrow + headline */}
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{
+                opacity: isHeaderInView || prefersReducedMotion ? 1 : 0,
+                y: isHeaderInView || prefersReducedMotion ? 0 : 12,
+              }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: easeCurve }}
+              className="label-eyebrow mb-3 sm:mb-4 select-none"
+            >
+              {CAPABILITIES_COPY.eyebrow}
+            </motion.p>
+
             <h2
               id="capabilities-title"
-              className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+              className="text-[clamp(2rem,4.5vw,3.5rem)] font-semibold tracking-[-0.03em] leading-[1.06] text-foreground"
             >
               <WordsPullUp
                 text={CAPABILITIES_COPY.headline}
-                play={isLeftInView}
-                delay={prefersReducedMotion ? 0 : 0.08}
+                play={isHeaderInView}
+                delay={prefersReducedMotion ? 0 : 0.06}
                 lastWordAddon={<Dot color="blue" />}
               />
             </h2>
+          </div>
 
-            {/* Lead Copy */}
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{
-                opacity: isLeftInView || prefersReducedMotion ? 1 : 0,
-                y: isLeftInView || prefersReducedMotion ? 0 : 14,
-              }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : 0.6,
-                ease: easeCurve,
-                delay: prefersReducedMotion ? 0 : 0.16,
-              }}
-              className="text-base md:text-lg text-muted-foreground max-w-[380px] mt-6 leading-relaxed font-normal"
-            >
+          {/* Right: lead copy + CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{
+              opacity: isHeaderInView || prefersReducedMotion ? 1 : 0,
+              y: isHeaderInView || prefersReducedMotion ? 0 : 12,
+            }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: easeCurve, delay: prefersReducedMotion ? 0 : 0.1 }}
+            className="flex flex-col items-start justify-center md:pt-2"
+          >
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-normal">
               {CAPABILITIES_COPY.lead}
-            </motion.p>
+            </p>
 
-            {/* CTA Link: UnderlineLink with lucide ArrowRight */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{
-                opacity: isLeftInView || prefersReducedMotion ? 1 : 0,
-                y: isLeftInView || prefersReducedMotion ? 0 : 14,
-              }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : 0.6,
-                ease: easeCurve,
-                delay: prefersReducedMotion ? 0 : 0.24,
-              }}
-              className="mt-8"
+            <TransitionLink
+              href={CAPABILITIES_COPY.cta.href}
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
-              <UnderlineLink
-                href={CAPABILITIES_COPY.cta.href}
-                className="px-0 h-auto inline-flex items-center gap-1.5"
-                underlineClassName="bottom-0 inset-x-0"
+              <span>{CAPABILITIES_COPY.cta.label}</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </TransitionLink>
+          </motion.div>
+        </div>
+
+        {/* CAPABILITY CARDS: horizontal numbered grid */}
+        <div
+          ref={cardsRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+          {CAPABILITIES.map((capability, index) => {
+            const numStr = String(index + 1).padStart(2, "0");
+            const isLastCard = index === CAPABILITIES.length - 1;
+
+            return (
+              <motion.div
+                key={capability.slug}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{
+                  opacity: isCardsInView || prefersReducedMotion ? 1 : 0,
+                  y: isCardsInView || prefersReducedMotion ? 0 : 20,
+                }}
+                transition={{
+                  duration: prefersReducedMotion ? 0 : 0.6,
+                  ease: easeCurve,
+                  delay: prefersReducedMotion ? 0 : index * 0.07,
+                }}
               >
-                <span>{CAPABILITIES_COPY.cta.label}</span>
-                <ArrowRight className="w-4 h-4 ml-1 inline shrink-0" />
-              </UnderlineLink>
-            </motion.div>
+                <TransitionLink
+                  href={`/services#${capability.slug}`}
+                  className={`group flex flex-col p-6 md:p-7 rounded-2xl border h-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                    isLastCard
+                      ? "theme-ink bg-foreground text-background border-foreground hover:opacity-90"
+                      : "bg-card text-foreground border-border hover:border-foreground/30"
+                  }`}
+                >
+                  {/* Number */}
+                  <span
+                    className={`label-mono mb-5 select-none ${
+                      isLastCard ? "text-background/60" : "text-bit-blue"
+                    }`}
+                    style={isLastCard ? {} : { color: "var(--bit-blue)" }}
+                  >
+                    {numStr}
+                  </span>
 
-            {/* Desktop Counter Strip */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{
-                opacity: isLeftInView || prefersReducedMotion ? 1 : 0,
-                y: isLeftInView || prefersReducedMotion ? 0 : 14,
-              }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : 0.6,
-                ease: easeCurve,
-                delay: prefersReducedMotion ? 0 : 0.32,
-              }}
-              className="hidden lg:block mt-12 data-mono text-muted-foreground select-none"
-            >
-              {`${countPadded} capabilities · 8 bits each`}
-            </motion.div>
-          </div>
+                  {/* Title */}
+                  <h3
+                    className={`text-xl font-semibold tracking-[-0.02em] leading-snug mb-3 ${
+                      isLastCard ? "text-background" : "text-foreground"
+                    }`}
+                  >
+                    {capability.title}
+                  </h3>
 
-          {/* RIGHT COLUMN: Capabilities List */}
-          <div className="w-full">
-            <ul role="list" className="border-t border-border">
-              {CAPABILITIES.map((capability, index) => (
-                <CapabilityRow
-                  key={capability.slug}
-                  item={capability}
-                  index={index}
-                />
-              ))}
-            </ul>
-          </div>
+                  {/* Description */}
+                  <p
+                    className={`text-sm leading-relaxed font-normal mb-6 flex-1 ${
+                      isLastCard ? "text-background/70" : "text-muted-foreground"
+                    }`}
+                  >
+                    {capability.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {capability.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className={`label-mono text-[10px] px-2 py-1 rounded-full border select-none ${
+                          isLastCard
+                            ? "border-background/30 text-background/60"
+                            : "border-border text-muted-foreground"
+                        }`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </TransitionLink>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

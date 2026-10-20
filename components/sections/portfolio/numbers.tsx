@@ -14,7 +14,7 @@ interface StatCellProps {
   targetValue: number;
   isInView: boolean;
   prefersReducedMotion: boolean;
-  isFirstOnLg: boolean;
+  index: number;
 }
 
 function StatCell({
@@ -22,7 +22,7 @@ function StatCell({
   targetValue,
   isInView,
   prefersReducedMotion,
-  isFirstOnLg,
+  index,
 }: StatCellProps) {
   const [displayValue, setDisplayValue] = useState(prefersReducedMotion ? targetValue : 0);
 
@@ -60,10 +60,11 @@ function StatCell({
   return (
     <div
       className={cn(
-        "p-6 md:p-8 flex flex-col justify-between border-b border-border",
-        "border-r border-border md:border-r-0",
-        "lg:border-l lg:border-border",
-        isFirstOnLg && "lg:border-l-0"
+        "p-4 sm:p-6 md:p-8 flex flex-col justify-between bg-card",
+        index < 2 ? "border-b border-border" : "border-b-0",
+        index % 2 === 0 ? "border-r border-border lg:border-r-0" : "border-r-0",
+        index > 0 ? "lg:border-l lg:border-border" : "lg:border-l-0",
+        "lg:border-b-0"
       )}
     >
       <div>
@@ -73,7 +74,7 @@ function StatCell({
         </span>
         <span
           aria-hidden="true"
-          className="font-mono text-[clamp(2.5rem,5vw,4rem)] font-normal leading-none tracking-[-0.03em] tabular-nums text-foreground block"
+          className="font-mono text-[clamp(2rem,4.5vw,4rem)] font-normal leading-none tracking-[-0.03em] tabular-nums text-foreground block"
         >
           {displayValue}
         </span>
@@ -126,11 +127,11 @@ export function Numbers() {
       id="numbers"
       data-nav-theme="ink"
       aria-labelledby="numbers-title"
-      className="theme-ink bg-background text-foreground py-20 lg:py-28 relative"
+      className="theme-ink bg-background text-foreground py-16 md:py-20 lg:py-28 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         {/* Header Block */}
-        <div className="max-w-xl mb-12 lg:mb-16">
+        <div className="max-w-xl mb-10 lg:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{
@@ -153,7 +154,7 @@ export function Numbers() {
 
           <h2
             id="numbers-title"
-            className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+            className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground"
           >
             <WordsPullUp
               text={headline}
@@ -165,7 +166,7 @@ export function Numbers() {
         </div>
 
         {/* 4-Cell Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-border">
+        <div className="grid grid-cols-2 lg:grid-cols-4 border border-border rounded-2xl overflow-hidden">
           {items.map((item, index) => (
             <StatCell
               key={item.label}
@@ -173,7 +174,7 @@ export function Numbers() {
               targetValue={item.value}
               isInView={isInView}
               prefersReducedMotion={prefersReducedMotion}
-              isFirstOnLg={index === 0}
+              index={index}
             />
           ))}
         </div>

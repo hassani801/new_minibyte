@@ -73,10 +73,10 @@ export function Faq() {
       id="faq"
       data-nav-theme="paper"
       aria-labelledby="faq-title"
-      className="bg-background text-foreground py-24 lg:py-32 relative"
+      className="bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-12 lg:gap-20 items-start">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[4fr_8fr] gap-10 md:gap-12 lg:gap-20 items-start">
           {/* LEFT: Eyebrow and Headline */}
           <div ref={headerRef} className="flex flex-col items-start">
             <motion.div
@@ -101,7 +101,7 @@ export function Faq() {
 
             <h2
               id="faq-title"
-              className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+              className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
             >
               <WordsPullUp
                 text={headline}
@@ -131,8 +131,8 @@ export function Faq() {
                       onClick={() => toggleItem(index)}
                       onKeyDown={(e) => handleKeyDown(e, index)}
                       className={cn(
-                        "group w-full flex justify-between items-center gap-6 py-6 text-left",
-                        "text-lg md:text-xl font-medium text-foreground tracking-[-0.01em]",
+                        "group w-full flex justify-between items-center gap-4 sm:gap-6 py-4 sm:py-6 text-left",
+                        "text-base sm:text-lg md:text-xl font-medium text-foreground tracking-[-0.01em]",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground rounded-lg",
                         "transition-colors duration-200"
                       )}

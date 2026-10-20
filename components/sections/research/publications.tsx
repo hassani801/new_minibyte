@@ -222,9 +222,9 @@ export function Publications() {
       data-nav-theme="ink"
       aria-labelledby="publications-title"
       style={{ scrollMarginTop: "calc(var(--nav-h) + 24px)" }}
-      className="theme-ink bg-background text-foreground py-24 lg:py-32 relative"
+      className="theme-ink bg-background text-foreground py-16 md:py-24 lg:py-32 relative"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8">
         {/* Header Row */}
         <div
           ref={headerRef}
@@ -254,7 +254,7 @@ export function Publications() {
 
             <h2
               id="publications-title"
-              className="text-[clamp(2.25rem,4.6vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-5 text-foreground"
+              className="text-[clamp(2rem,4.5vw,3.5rem)] font-medium tracking-[-0.03em] leading-[1.04] mt-4 sm:mt-5 text-foreground [overflow-wrap:anywhere]"
             >
               <WordsPullUp
                 text={headline}
@@ -285,12 +285,12 @@ export function Publications() {
           onChange={setSelectedType}
           label={filterLabel}
           allLabel={all}
-          className="mb-12"
+          className="mb-8 md:mb-12"
         />
 
         {/* Publications List Grouped by Year */}
         {filteredPublications.length === 0 ? (
-          <div className="bg-card border border-border rounded-2xl p-12 text-center flex flex-col items-center justify-center min-h-[260px]">
+          <div className="bg-card border border-border rounded-2xl p-6 sm:p-12 text-center flex flex-col items-center justify-center min-h-[220px] sm:min-h-[260px]">
             <p className="text-base text-muted-foreground mb-6 font-normal">
               {empty}
             </p>
@@ -303,13 +303,13 @@ export function Publications() {
             </button>
           </div>
         ) : (
-          <div className="flex flex-col space-y-16">
+          <div className="flex flex-col space-y-12 sm:space-y-16">
             <AnimatePresence mode="popLayout" initial={false}>
               {yearGroups.map((group) => (
                 <section
                   key={group.year}
                   aria-label={`Publications from ${group.year}`}
-                  className="grid grid-cols-1 lg:grid-cols-[1fr_5fr] gap-x-10 border-t border-border pt-6 pb-4"
+                  className="grid grid-cols-1 lg:grid-cols-[1fr_5fr] gap-x-8 lg:gap-x-10 border-t border-border pt-6 pb-4"
                 >
                   {/* Left Sticky Year Label */}
                   <div className="lg:sticky lg:top-[calc(var(--nav-h)+24px)] self-start mb-4 lg:mb-0">

@@ -233,9 +233,9 @@ export function FooterSignature({ className }: FooterSignatureProps) {
       />
 
       <div
-        className="mb-signature-grid inline-grid w-full justify-items-center select-none"
+        className="mb-signature-grid inline-grid w-full justify-items-center justify-center select-none max-w-full"
         style={{
-          fontSize: "20cqw",
+          fontSize: "clamp(1.5rem, 19cqw, 14rem)",
           fontFamily: "var(--font-mono)",
           lineHeight: 1,
           letterSpacing: 0,

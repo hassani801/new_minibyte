@@ -24,7 +24,7 @@ function GridSkeleton() {
   return (
     <section
       data-nav-theme="paper"
-      className="py-20 lg:py-28 max-w-[1280px] mx-auto px-6 md:px-8"
+      className="py-16 md:py-20 lg:py-28 max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8"
     >
       <div className="h-10 w-48 bg-card border border-border rounded-lg animate-pulse mb-12" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

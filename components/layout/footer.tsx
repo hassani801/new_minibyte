@@ -27,25 +27,25 @@ export function Footer() {
       data-nav-theme="ink"
       className="theme-ink bg-background text-foreground relative overflow-hidden"
     >
-      <div className="mx-auto max-w-[1280px] px-6 md:px-8 pt-20 md:pt-28 pb-[max(24px,env(safe-area-inset-bottom))]">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 md:px-8 pt-16 md:pt-28 pb-[max(24px,env(safe-area-inset-bottom))]">
         {/* TOP ZONE: Left Brand Column & Right Nav Columns */}
-        <div className="grid gap-12 lg:grid-cols-[5fr_7fr] items-start">
+        <div className="grid gap-10 md:gap-12 lg:grid-cols-[5fr_7fr] items-start">
           {/* LEFT: Logo, Tagline, Descriptor */}
           <div className="flex flex-col items-start max-w-sm">
             <Logo variant="logo" tone="paper" asLink href="/" size="1.5rem" />
 
-            <p className="text-xl md:text-2xl font-medium tracking-[-0.02em] leading-snug mt-7 max-w-[18ch] text-foreground">
+            <p className="text-xl md:text-2xl font-medium tracking-[-0.02em] leading-snug mt-5 sm:mt-7 max-w-[18ch] text-foreground">
               {FOOTER.tagline}
               <Dot color="current" aria-hidden="true" />
             </p>
 
-            <span className="label-mono text-muted-foreground mt-4 select-none">
+            <span className="label-mono text-muted-foreground mt-3 sm:mt-4 select-none">
               {FOOTER.descriptor}
             </span>
           </div>
 
           {/* RIGHT: Responsive Column Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-10 w-full">
+          <div className="grid grid-cols-1 min-[420px]:grid-cols-2 sm:grid-cols-3 gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-10 w-full">
             {/* Pages & Work with us Link Columns wrapped in semantic <nav> */}
             <nav aria-label="Footer" className="contents">
               {FOOTER.columns.map((column) => (
