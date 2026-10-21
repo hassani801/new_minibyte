@@ -45,7 +45,7 @@ export function Footer() {
           </div>
 
           {/* RIGHT: Responsive Column Grid */}
-          <div className="grid grid-cols-1 min-[420px]:grid-cols-2 sm:grid-cols-3 gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-10 w-full">
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-10 w-full">
             {/* Pages & Work with us Link Columns wrapped in semantic <nav> */}
             <nav aria-label="Footer" className="contents">
               {FOOTER.columns.map((column) => (
@@ -80,11 +80,11 @@ export function Footer() {
                 Contact
               </h2>
 
-              <div className="mt-5 space-y-3 flex flex-col items-start">
+              <div className="mt-5 space-y-3 flex flex-col items-start w-full">
                 {CONTACT.email && (
                   <UnderlineLink
                     href={`mailto:${CONTACT.email}`}
-                    className="px-0 h-auto font-mono text-sm data-mono text-foreground inline-flex items-center"
+                    className="px-0 h-auto font-mono text-sm data-mono text-foreground inline-flex items-center break-all sm:break-normal"
                     underlineClassName="bottom-0 inset-x-0"
                   >
                     {CONTACT.email}
@@ -152,8 +152,8 @@ export function Footer() {
         </div>
 
         {/* BACK TO TOP ROW */}
-        <div className="mt-14 pt-6 border-t border-border flex items-center justify-between gap-4">
-          <span className="hidden sm:block label-mono text-muted-foreground select-none tabular-nums">
+        <div className="mt-12 sm:mt-14 pt-6 border-t border-border flex items-center justify-between gap-4">
+          <span className="label-mono text-muted-foreground select-none tabular-nums text-[10px] sm:text-xs">
             01101101 = m
           </span>
 
@@ -163,13 +163,13 @@ export function Footer() {
         </div>
 
         {/* BOTTOM BAR: Copyright & Legal */}
-        <div className="py-6 border-t border-border flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 text-xs label-mono text-muted-foreground">
-          <p className="m-0">
+        <div className="py-6 border-t border-border flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-4 text-xs label-mono text-muted-foreground">
+          <p className="m-0 text-[11px] sm:text-xs">
             © <FooterYear /> {FOOTER.legalName}. All rights reserved.
           </p>
 
           {visibleLegal.length > 0 && (
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               {visibleLegal.map((item, idx) => (
                 <React.Fragment key={item.name}>
                   {idx > 0 && (
@@ -180,7 +180,7 @@ export function Footer() {
                   )}
                   <UnderlineLink
                     href={item.href}
-                    className="px-0 h-auto text-xs label-mono text-muted-foreground hover:text-foreground"
+                    className="px-0 h-auto text-[11px] sm:text-xs label-mono text-muted-foreground hover:text-foreground"
                     underlineClassName="bottom-0 inset-x-0"
                   >
                     {item.name}

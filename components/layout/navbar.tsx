@@ -18,7 +18,7 @@ import { TransitionLink } from "@/components/layout/transition-link";
 import { ScrambleText } from "@/components/ui/scramble-text";
 import { useLenis } from "@/components/providers/smooth-scroll";
 import { usePageReady, PAGE_READY_EVENT } from "@/lib/transition";
-import { NAV_ITEMS, MENU_ITEMS } from "@/lib/constants";
+import { NAV_ITEMS, MENU_ITEMS, CONTACT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 /**
@@ -241,19 +241,23 @@ export function Navbar() {
       <header
         id="site-header"
         ref={headerRef}
-        data-nav-theme={theme}
+        data-nav-theme={isOpen ? "ink" : theme}
         className={cn(
           "fixed top-0 inset-x-0 h-[var(--nav-h)] transition-colors duration-300",
-          isOpen ? "z-[70]" : "z-50",
-          (theme === "ink" || theme === "blue") && "theme-ink",
+          isOpen
+            ? "z-[70] theme-ink bg-background border-b border-border"
+            : "z-50",
+          !isOpen && (theme === "ink" || theme === "blue") && "theme-ink",
           !isReady && "opacity-0 pointer-events-none",
-          isHidden && "-translate-y-full",
+          isHidden && !isOpen && "-translate-y-full",
           "transition-transform duration-300 ease-out",
-          isScrolledMobile
-            ? theme === "blue"
-              ? "max-md:bg-ink max-md:border-b max-md:border-border"
-              : "max-md:bg-background max-md:border-b max-md:border-border"
-            : "max-md:bg-transparent max-md:border-transparent",
+          !isOpen && (
+            isScrolledMobile
+              ? theme === "blue"
+                ? "max-md:bg-ink max-md:border-b max-md:border-border"
+                : "max-md:bg-background max-md:border-b max-md:border-border"
+              : "max-md:bg-transparent max-md:border-transparent"
+          ),
           "md:bg-transparent md:border-transparent"
         )}
       >
@@ -265,8 +269,11 @@ export function Navbar() {
               href="/"
               variant="logo"
               size="1.125rem"
-              tone={theme === "blue" ? "mono" : theme === "ink" ? "paper" : "ink"}
-              className={theme === "blue" ? "text-white" : undefined}
+              tone={isOpen ? "paper" : theme === "blue" ? "mono" : theme === "ink" ? "paper" : "ink"}
+              className={theme === "blue" && !isOpen ? "text-white" : undefined}
+              onClick={() => {
+                if (isOpen) setIsOpen(false);
+              }}
             />
           </div>
 
@@ -338,24 +345,39 @@ export function Navbar() {
             onClick={() => setIsOpen((prev) => !prev)}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            className="md:hidden rounded-full h-10 px-4 border border-border bg-card text-xs font-mono uppercase tracking-[0.08em] flex items-center gap-2.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring select-none text-foreground cursor-pointer"
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            className={cn(
+              "md:hidden rounded-full h-10 px-4 border text-xs font-mono uppercase tracking-[0.08em] flex items-center gap-2.5 transition-all select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-95",
+              isOpen
+                ? "border-border bg-card text-foreground"
+                : theme === "blue"
+                ? "border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
+                : "border-border bg-card text-foreground hover:bg-muted"
+            )}
           >
-            <span>{isOpen ? "CLOSE" : "MENU"}</span>
+            <span className="font-medium">{isOpen ? "CLOSE" : "MENU"}</span>
             <span
               className="relative w-[14px] h-[10px] flex items-center justify-center pointer-events-none"
               aria-hidden="true"
             >
               <span
                 className={cn(
-                  "absolute w-[14px] h-[1.5px] bg-foreground rounded-full transition-transform duration-200 ease-out",
-                  isOpen ? "rotate-45 translate-y-0" : "-translate-y-[3px]"
+                  "absolute w-[14px] h-[1.5px] rounded-full transition-transform duration-200 ease-out",
+                  isOpen
+                    ? "bg-foreground rotate-45 translate-y-0"
+                    : theme === "blue"
+                    ? "bg-white -translate-y-[3px]"
+                    : "bg-foreground -translate-y-[3px]"
                 )}
               />
               <span
                 className={cn(
-                  "absolute w-[14px] h-[1.5px] bg-foreground rounded-full transition-transform duration-200 ease-out",
-                  isOpen ? "-rotate-45 translate-y-0" : "translate-y-[3px]"
+                  "absolute w-[14px] h-[1.5px] rounded-full transition-transform duration-200 ease-out",
+                  isOpen
+                    ? "bg-foreground -rotate-45 translate-y-0"
+                    : theme === "blue"
+                    ? "bg-white translate-y-[3px]"
+                    : "bg-foreground translate-y-[3px]"
                 )}
               />
             </span>
@@ -369,15 +391,15 @@ export function Navbar() {
           id="mobile-menu"
           ref={menuContentRef}
           onEscapeKeyDown={() => setIsOpen(false)}
-          className="fixed inset-0 z-[60] theme-ink bg-background text-foreground pt-[calc(var(--nav-h)+16px)] px-5 sm:px-6 pb-8 flex flex-col justify-between overflow-y-auto overscroll-contain outline-none min-h-[100dvh]"
+          className="fixed inset-0 z-[60] theme-ink bg-background text-foreground pt-[calc(var(--nav-h)+16px)] px-5 sm:px-6 pb-6 flex flex-col justify-between overflow-y-auto overscroll-contain outline-none min-h-[100dvh] [-webkit-overflow-scrolling:touch]"
         >
-          <Dialog.Title className="sr-only">Menu</Dialog.Title>
+          <Dialog.Title className="sr-only">Site Navigation</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Navigation menu
+            Primary site navigation links and laboratory contact details
           </Dialog.Description>
 
           {/* Menu Items List */}
-          <div ref={menuListRef} className="flex flex-col w-full">
+          <div ref={menuListRef} className="flex flex-col w-full my-auto">
             {MENU_ITEMS.map((item, idx) => {
               const isActive =
                 item.href === "/"
@@ -390,23 +412,28 @@ export function Navbar() {
                   <TransitionLink
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between py-4 sm:py-5 border-b border-border w-full group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex items-center justify-between py-3.5 sm:py-4 border-b border-border w-full group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring min-h-[52px]"
                   >
                     <span className="flex items-baseline gap-3 sm:gap-4">
                       <span className="font-mono text-xs text-muted-foreground tabular-nums select-none">
                         {numStr}
                       </span>
-                      <span className="text-[clamp(1.75rem,7.5vw,2.75rem)] font-medium tracking-tight text-foreground transition-transform duration-200 group-hover:translate-x-1">
+                      <span className="text-[clamp(1.625rem,7vw,2.5rem)] font-medium tracking-tight text-foreground transition-transform duration-200 group-hover:translate-x-1">
                         {item.name}
                       </span>
                     </span>
 
                     {/* Blue dot after active item exclusively */}
-                    {isActive && (
-                      <Dot
-                        color="blue"
-                        className="text-2xl"
-                      />
+                    {isActive ? (
+                      <span className="flex items-center gap-2">
+                        <span className="sr-only">(current page)</span>
+                        <Dot
+                          color="blue"
+                          className="text-2xl"
+                        />
+                      </span>
+                    ) : (
+                      <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0" />
                     )}
                   </TransitionLink>
                 </div>
@@ -415,18 +442,21 @@ export function Navbar() {
           </div>
 
           {/* Bottom Decoration & Lab Tagline */}
-          <div className="pt-8 flex items-end justify-between border-t border-border/40 mt-8">
+          <div className="pt-6 sm:pt-8 flex flex-col min-[400px]:flex-row min-[400px]:items-end justify-between gap-4 border-t border-border/40 mt-6 sm:mt-8 pb-[max(1rem,env(safe-area-inset-bottom,1rem))] shrink-0">
             <div className="space-y-1">
-              <div className="label-mono text-muted-foreground">
+              <div className="label-mono text-muted-foreground text-[10px] sm:text-[11px]">
                 AI RESEARCH LAB
               </div>
-              <div className="font-mono text-xs text-muted-foreground select-all">
-                contact@minibyte.ai
-              </div>
+              <a
+                href={`mailto:${CONTACT.email}`}
+                className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors select-all block"
+              >
+                {CONTACT.email}
+              </a>
             </div>
 
             <div
-              className="opacity-50 pointer-events-none select-none"
+              className="opacity-50 pointer-events-none select-none hidden min-[440px]:block shrink-0"
               aria-hidden="true"
             >
               <DotPattern

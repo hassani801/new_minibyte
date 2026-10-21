@@ -23,6 +23,16 @@ interface MetricCellProps {
   index: number;
 }
 
+function parseMetric(rawValue: string) {
+  const match = rawValue.match(/^([^0-9]*)([0-9]+(?:\.[0-9]+)?)(.*)$/);
+  return {
+    prefix: match ? match[1] : "",
+    targetNum: match ? parseFloat(match[2]) : 0,
+    suffix: match ? match[3] : "",
+    isDecimal: match ? match[2].includes(".") : false,
+  };
+}
+
 function MetricCell({
   rawValue,
   label,
@@ -30,15 +40,15 @@ function MetricCell({
   prefersReducedMotion,
   index,
 }: MetricCellProps) {
-  const match = rawValue.match(/^([^0-9]*)([0-9]+(?:\.[0-9]+)?)(.*)$/);
-  const prefix = match ? match[1] : "";
-  const targetNum = match ? parseFloat(match[2]) : 0;
-  const suffix = match ? match[3] : "";
-  const isDecimal = match ? match[2].includes(".") : false;
+  const { prefix, targetNum, suffix, isDecimal } = React.useMemo(
+    () => parseMetric(rawValue),
+    [rawValue]
+  );
 
   const [displayValue, setDisplayValue] = useState(
     prefersReducedMotion ? rawValue : `${prefix}0${suffix}`
   );
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -46,29 +56,37 @@ function MetricCell({
       return;
     }
 
-    if (!isInView || !match) return;
+    if (!isInView || hasAnimatedRef.current) return;
 
-    const duration = 1200; // 1.2s
+    let rafId: number;
+    const duration = 1400; // 1.4s smooth roll
     const startTime = performance.now();
 
     const frame = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(1, elapsed / duration);
-      // power2.out easing
-      const eased = 1 - Math.pow(1 - progress, 2);
+      // Quartic ease-out for smooth decelerating count-up
+      const eased = 1 - Math.pow(1 - progress, 4);
       const current = eased * targetNum;
       const formatted = isDecimal ? current.toFixed(1) : Math.round(current).toString();
       setDisplayValue(`${prefix}${formatted}${suffix}`);
 
       if (progress < 1) {
-        requestAnimationFrame(frame);
+        rafId = requestAnimationFrame(frame);
       } else {
         setDisplayValue(rawValue);
+        hasAnimatedRef.current = true;
       }
     };
 
-    requestAnimationFrame(frame);
-  }, [isInView, rawValue, targetNum, prefix, suffix, isDecimal, prefersReducedMotion, match]);
+    rafId = requestAnimationFrame(frame);
+
+    return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+    };
+  }, [isInView, rawValue, targetNum, prefix, suffix, isDecimal, prefersReducedMotion]);
 
   const binaryString = (Math.round(targetNum) % 256).toString(2).padStart(8, "0");
 

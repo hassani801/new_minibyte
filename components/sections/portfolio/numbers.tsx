@@ -25,6 +25,7 @@ function StatCell({
   index,
 }: StatCellProps) {
   const [displayValue, setDisplayValue] = useState(prefersReducedMotion ? targetValue : 0);
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -32,27 +33,35 @@ function StatCell({
       return;
     }
 
-    if (!isInView) return;
+    if (!isInView || hasAnimatedRef.current) return;
 
-    const duration = 1200; // 1.2s
+    let rafId: number;
+    const duration = 1400; // 1.4s smooth roll
     const startTime = performance.now();
 
     const frame = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(1, elapsed / duration);
-      // power2.out easing: 1 - (1 - progress)^2
-      const eased = 1 - Math.pow(1 - progress, 2);
+      // Quartic ease-out: 1 - (1 - progress)^4
+      const eased = 1 - Math.pow(1 - progress, 4);
       const current = Math.round(eased * targetValue);
       setDisplayValue(current);
 
       if (progress < 1) {
-        requestAnimationFrame(frame);
+        rafId = requestAnimationFrame(frame);
       } else {
         setDisplayValue(targetValue);
+        hasAnimatedRef.current = true;
       }
     };
 
-    requestAnimationFrame(frame);
+    rafId = requestAnimationFrame(frame);
+
+    return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+    };
   }, [isInView, targetValue, prefersReducedMotion]);
 
   const binaryString = (targetValue % 256).toString(2).padStart(8, "0");
